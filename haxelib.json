@@ -1,10 +1,11 @@
 {
 	"name": "hxwerks",
+	"url": "https://github.com/Valh88/Hxwerks.git",
 	"license": "MIT",
 	"tags": ["hxwerks", "leadwerks", "lua"],
 	"description": "Leadwerks 5 Haxe/Lua bindings and entity-script tooling",
-	"version": "0.1.0",
-	"releasenote": "",
+	"version": "0.3.0",
+	"releasenote": "Expanded externs (entity search, world pick, globals); haxelib run hxwerks init; non-production README.",
 	"contributors": ["vano"],
 	"dependencies": {},
 	"classPath": "src",
