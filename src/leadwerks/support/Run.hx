@@ -30,14 +30,14 @@ class Run
 	}
 
 	static var hxml = [
-		"# Hxwerks / Leadwerks 5 - run `haxe build.hxml` from this folder.",
-		"# Lua output: ../Main.lua (keep this project directly under Scripts/, e.g. Scripts/MyGame/).",
+		"# Hxwerks / Leadwerks 5 - run `haxe build.hxml` from this folder (same folder as build.hxml).",
+		"# Main.lua is written next to build.hxml; entity wrappers go under Entities/HxGen relative to this folder.",
 		"-cp src",
 		"-lib hxwerks",
 		"-main Main",
-		"-lua ../Main.lua",
+		"-lua Main.lua",
 		"-D lua-vanilla",
-		"-D hxwerks-projectroot=..",
+		"-D hxwerks-projectroot=.",
 		"-D hxwerks-entitiesdir=Entities/HxGen",
 		"--macro leadwerks.support.ScriptMacro.use()",
 		'--macro include("", true, null, ["src"])',
@@ -55,7 +55,7 @@ class Run
 		"import leadwerks.types.Vec3;",
 		"",
 		"/**",
-		"	Entry script compiled to `Scripts/Main.lua`.",
+		"	Compiled to Main.lua next to build.hxml (Leadwerks entry script).",
 		"	Adjust window title, resolution, or add `Globals.LoadScene(world, \"Maps/Your.map\")` as needed.",
 		"**/",
 		"class Main {",

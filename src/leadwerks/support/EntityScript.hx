@@ -1,5 +1,7 @@
 package leadwerks.support;
 
+import leadwerks.Entity;
+
 /**
 	Base class for Leadwerks 5 entity scripts.
 	Subclasses get a generated `.lua` next to the project Entities folder; see `ScriptMacro`.
@@ -13,8 +15,8 @@ abstract class EntityScript
 
 	/** Current entity while a lifecycle method runs (set by generated Lua). **/
 	@:noCompletion
-	public inline function luaEntity():Dynamic
-		return leadwerks.Globals._hxwerks_self_;
+	public inline function luaEntity():Entity
+		return cast leadwerks.Globals._hxwerks_self_;
 
 	/** Called when the script is attached / entity starts. **/
 	@:dox(show) function start():Void

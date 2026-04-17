@@ -15,6 +15,6 @@ class DemoRotate extends EntityScript {
 
 	override function update():Void {
 		// Leadwerks entity scripts don't pass dt; apply a small per-frame movement for now.
-		untyped luaEntity().Move(0, moveSpeed * 0.016, 0);
+		luaEntity().Move(0, moveSpeed * 0.016, 0);
 	}
 }

@@ -1,7 +1,9 @@
 package leadwerks.types;
 
+/** Result of `World.Pick` / `Camera.Pick` (world line picks expose `success`). **/
 typedef PickInfo =
 {
-	var entity:Dynamic;
-	var position:Dynamic;
+	?success:Bool,
+	entity:Dynamic,
+	position:Dynamic,
 }
