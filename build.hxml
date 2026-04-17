@@ -1,0 +1,15 @@
+-cp src
+-cp game
+# Main entrypoint for Leadwerks runtime (compiled to Scripts/Main.lua)
+-main game.Main
+# Рекурсивно все .hx под `src` и `game` (как hxdefold). Две строки: запятая в ["src","game"]
+# ломает разбор одной строки hxml в Windows; отдельная папка не может называться `example` — конфликт с package example.
+--macro include("", true, null, ["src"])
+--macro include("", true, null, ["game"])
+-lua ../Main.lua
+# Leadwerks runtime has no lua-utf8; avoid require("lua-utf8") in generated code.
+-D lua-vanilla
+-D hxwerks-projectroot=..
+-D hxwerks-entitiesdir=Entities/HxGen
+--macro leadwerks.support.ScriptMacro.use()
+-dce full

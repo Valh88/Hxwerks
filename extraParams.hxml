@@ -1,0 +1,3 @@
+-D lua-vanilla
+-D hxwerks-entitiesdir=Entities/HxGen
+--macro leadwerks.support.ScriptMacro.use()

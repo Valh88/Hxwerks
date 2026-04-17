@@ -1,0 +1,12 @@
+{
+	"name": "hxwerks",
+	"license": "MIT",
+	"tags": ["hxwerks", "leadwerks", "lua"],
+	"description": "Leadwerks 5 Haxe/Lua bindings and entity-script tooling",
+	"version": "0.1.0",
+	"releasenote": "",
+	"contributors": ["vano"],
+	"dependencies": {},
+	"classPath": "src",
+	"main": "leadwerks.support.Run"
+}
