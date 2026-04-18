@@ -1,0 +1,18 @@
+# C++ game code: run `haxe build-cpp.hxml` before VS when linking libMain.lib (see Readme.md → «For library users»).
+-cp src
+-cp gamecpp
+# Mirror hxdefold-style recursive includes (two lines; comma in one line breaks Windows hxml).
+--macro include("", true, null, ["src"])
+--macro include("", true, null, ["gamecpp"])
+-main gamecpp.Main
+-cpp ../HxCppOut
+-dce full
+-D analyzer-optimize
+-D hxwerks_cpp
+# Embed in game exe: libMain.lib + real HxwerksCppBridge.cpp (no stub); run `haxe build-cpp.hxml` before VS build.
+-D hxwerks_embed
+-D static_link
+# Match Leadwerks game project (x64); required or libMain.lib is x86 and link fails.
+-D HXCPP_M64
+# Dynamic CRT /MD (MultiThreadedDLL) — same family as typical VS Release. Passed to hxcpp *before* toolchain (fixes LNK2038 vs /MT).
+-D ABI=-MD

@@ -1,0 +1,13 @@
+# Hxwerks / Leadwerks 5 - run `haxe build.hxml` from this folder (same folder as build.hxml).
+# Main.lua is written next to build.hxml; entity wrappers go under Entities/HxGen relative to this folder.
+-cp src
+-lib hxwerks
+-main Main
+-lua Main.lua
+-D lua-vanilla
+-D hxwerks-projectroot=.
+-D hxwerks-entitiesdir=Entities/HxGen
+--macro leadwerks.support.ScriptMacro.use()
+--macro include("", true, null, ["src"])
+-dce full
+-D analyzer-optimize

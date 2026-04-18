@@ -13,8 +13,15 @@ import leadwerks.types.Vec3;
 import leadwerks.types.PickInfo;
 
 /**
-	Reimplementation of `Scripts/Main.lua` in Haxe.
-	This is compiled directly into `Scripts/Main.lua`.
+	Haxe **Lua target only** (`haxe build.hxml` → `Main.lua` next to project root, see `build.hxml`).
+
+	This code runs **only if** the Leadwerks game entry actually **executes that `Main.lua`**
+	(e.g. startup script / project setting points at it). If you run the **hxcpp** executable
+	(`gamecpp.Main`) or another entry, **`Main.lua` is never run** — no `_hx_static_init`,
+	no `_hxwerks_`, HxGen entity scripts (`Entities/HxGen/...`) will not call into Haxe.
+
+	For cpp-only tests use plain Lua on entities (e.g. `Entities/AI/DemoRotate_standalone.lua`)
+	or add a native bootstrap that runs the compiled `Main.lua` before the main loop.
 **/
 class Main {
 	static function main():Void {

@@ -1,6 +1,7 @@
 -cp src
 -cp game
-# Main entrypoint for Leadwerks runtime (compiled to Scripts/Main.lua)
+# Lua output: `../Main.lua` from this folder (= project Source / game root). It runs only if the engine entry runs this file.
+# C++/gamecpp uses a different main — it does not execute this Lua unless you wire it in yourself.
 -main game.Main
 # Рекурсивно все .hx под `src` и `game` (как hxdefold). Две строки: запятая в ["src","game"]
 # ломает разбор одной строки hxml в Windows; отдельная папка не может называться `example` — конфликт с package example.

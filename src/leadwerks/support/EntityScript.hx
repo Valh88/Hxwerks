@@ -1,22 +1,29 @@
 package leadwerks.support;
 
+#if lua
 import leadwerks.Entity;
+#end
 
 /**
 	Base class for Leadwerks 5 entity scripts.
-	Subclasses get a generated `.lua` next to the project Entities folder; see `ScriptMacro`.
+	**Lua:** subclasses get generated `.lua` under `Entities/HxGen` and editor `@property` support (`ScriptMacro`).
+	**Cpp:** `EntityScript` is not wired for the cpp target — use `build.hxml` + Lua for entity scripts, or `Globals` / native bridge for cpp-only code (see Hxwerks `Readme.md`).
 **/
+#if lua
 @:autoBuild(leadwerks.support.EntityScriptBuilder.build())
+#end
 abstract class EntityScript
 {
 	final function new()
 	{
 	}
 
+#if lua
 	/** Current entity while a lifecycle method runs (set by generated Lua). **/
 	@:noCompletion
 	public inline function luaEntity():Entity
 		return cast leadwerks.Globals._hxwerks_self_;
+#end
 
 	/** Called when the script is attached / entity starts. **/
 	@:dox(show) function start():Void

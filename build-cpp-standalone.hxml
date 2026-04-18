@@ -1,0 +1,14 @@
+# SDK-less smoke test: standalone Main.exe + stub bridge. Not for linking into the Leadwerks game.
+-cp src
+-cp gamecpp
+--macro include("", true, null, ["src"])
+--macro include("", true, null, ["gamecpp"])
+-main gamecpp.Main
+-cpp ../HxCppOutStandalone
+-dce full
+-D analyzer-optimize
+-D hxwerks_cpp
+-D HXCPP_M64
+# Match typical VS /MD when linking or running the test exe.
+-D ABI=-MD
+# Standalone Main.exe + stub bridge (no Leadwerks). Output: Source/HxCppOutStandalone/

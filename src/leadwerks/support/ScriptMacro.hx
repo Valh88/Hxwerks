@@ -182,7 +182,9 @@ private class Glue
 			if (script.properties.length > 0)
 				b.add("\n");
 
-			b.add('${importLine}\n\n');
+			if (importLine != "")
+				b.add('${importLine}\n');
+			b.add("\n");
 
 			for (cb in script.callbacks)
 			{
@@ -192,14 +194,14 @@ private class Glue
 				var call = '_G._hxwerks_.${cb.method}($methodArgs)';
 				var cbName = luaCallbackName(cb.name);
 				b.add('function ${script.tableName}:${cbName}(${luaParams})
-    local _hxwerks_saved = ${EntityScriptBuilder.globalSelfRef}
-    ${EntityScriptBuilder.globalSelfRef} = self
+    local _hxwerks_saved = _G._hxwerks_self_
+    _G._hxwerks_self_ = self
     ');
 				if (cb.isVoid)
 					b.add('    $call\n');
 				else
 					b.add('    local _hxwerks_ret = $call\n');
-				b.add('    ${EntityScriptBuilder.globalSelfRef} = _hxwerks_saved\n');
+				b.add('    _G._hxwerks_self_ = _hxwerks_saved\n');
 				if (!cb.isVoid)
 					b.add('    return _hxwerks_ret\n');
 				b.add('end\n\n');
@@ -614,15 +616,21 @@ class ScriptMacro
 		parts[last] = Path.withoutExtension(parts[last]);
 		rel = parts.join("/");
 
-		var useImport = Context.definedValue("hxwerks-use-import");
-		var importLine = if (useImport == "false")
+		// Do not embed `import "Main.lua"` by default: AttachScript loads this file while Main.lua is already running;
+		// re-importing Main.lua can recurse or prevent Start/Update from behaving. `_hxwerks_` is set in `_hx_static_init`.
+		// Opt back in with `-D hxwerks-entity-main-import` (optional: `-D hxwerks-use-import=false` for `require` form).
+		var importLine = "";
+		if (Context.defined("hxwerks-entity-main-import"))
 		{
-			'require "${parts.join(".")}"';
-		} else
-		{
-			var luaPath = rel + ".lua";
-			'import "${luaPath}"';
-		};
+			var useImport = Context.definedValue("hxwerks-use-import");
+			importLine = if (useImport == "false")
+				'require "${parts.join(".")}"';
+			else
+			{
+				var luaPath = rel + ".lua";
+				'import "${luaPath}"';
+			};
+		}
 
 		var glue = new Glue(outDir, importLine);
 		var done = false;

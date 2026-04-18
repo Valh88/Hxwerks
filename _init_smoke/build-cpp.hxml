@@ -1,0 +1,10 @@
+# Hxwerks → hxcpp — run `haxe build-cpp.hxml` from this folder.
+# Output: ../HxCppOut (next to this directory). Requires hxcpp: haxelib install hxcpp
+-lib hxwerks
+-cp gamecpp
+--macro include("", true, null, ["gamecpp"])
+-main gamecpp.Main
+-cpp ../HxCppOut
+-dce full
+-D analyzer-optimize
+-D hxwerks_cpp

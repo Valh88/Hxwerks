@@ -1,0 +1,17 @@
+# MSVC /MDd → `HxCppOut/libMain_d.lib` for VS **Debug**. Use `build-cpp.hxml` for Release `libMain.lib`.
+-cp src
+-cp gamecpp
+--macro include("", true, null, ["src"])
+--macro include("", true, null, ["gamecpp"])
+-main gamecpp.Main
+-cpp ../HxCppOut
+-dce full
+-D analyzer-optimize
+-D hxwerks_cpp
+-D hxwerks_embed
+-D static_link
+-D HXCPP_M64
+-debug
+# Separate filename so VS Debug links MDd lib and Release links MD lib without manual rebuild.
+-D HAXE_OUTPUT_FILE=libMain_d
+-D ABI=-MDd
