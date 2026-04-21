@@ -1,5 +1,6 @@
 package game;
 
+import leadwerks.Display;
 import leadwerks.Globals;
 import leadwerks.Camera;
 import leadwerks.Entity;
@@ -29,7 +30,7 @@ class Main {
 		// Load project map (one level above Scripts/): HaxPro/Maps/HxMap.map
 		var mapPath = "Maps/HxMap.map";
 
-		var displays:Dynamic = Globals.GetDisplays();
+		var displays:Array<Display> = Globals.GetDisplays();
 		var window:Window = Globals.CreateWindow(
 			"Leadwerks",
 			0,

@@ -80,9 +80,13 @@ extern class Globals
 	// Leadwerks Vec3 constructor is a global function.
 	static function Vec3(x:Float, y:Float, z:Float):Dynamic;
 
+	/** Leadwerks Vec2 constructor. **/
+	static function Vec2(x:Float, y:Float):Dynamic;
+
 	/** Axis-aligned box; use `bounds.min` / `bounds.max` with `GetEntitiesInArea`. **/
 	static function Aabb(min:Vec3, max:Vec3):AabbBounds;
-
+	/** Square root function. **/
+	static function Sqrt(x:Float):Float;
 	/** Disables picking on an entity (common with projectiles / AI probes). **/
 	static var PICK_NONE:Int;
 

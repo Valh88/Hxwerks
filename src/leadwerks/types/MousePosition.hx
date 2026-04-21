@@ -1,7 +1,8 @@
 package leadwerks.types;
 
-typedef MousePosition =
-{
-	var x:Float;
-	var y:Float;
-}
+import leadwerks.types.Vec2;
+
+/**
+	Mouse position relative to the framebuffer.
+**/
+typedef MousePosition = Vec2;
