@@ -2,6 +2,7 @@ package leadwerks;
 
 import leadwerks.types.AabbBounds;
 import leadwerks.types.Vec3;
+import leadwerks.types.Vec2;
 
 /**
 	Global Leadwerks Lua API (`_G`). Extend as you map more engine functions.
@@ -78,10 +79,10 @@ extern class Globals
 	static var COLLISION_TRIGGER:Int;
 
 	// Leadwerks Vec3 constructor is a global function.
-	static function Vec3(x:Float, y:Float, z:Float):Dynamic;
+	static function Vec3(x:Float, y:Float, z:Float):Vec3;
 
 	/** Leadwerks Vec2 constructor. **/
-	static function Vec2(x:Float, y:Float):Dynamic;
+	static function Vec2(x:Float, y:Float):Vec2;
 
 	/** Axis-aligned box; use `bounds.min` / `bounds.max` with `GetEntitiesInArea`. **/
 	static function Aabb(min:Vec3, max:Vec3):AabbBounds;
@@ -91,6 +92,6 @@ extern class Globals
 	static var PICK_NONE:Int;
 
 	// Set by generated entity scripts while calling into Haxe.
-	static var _hxwerks_self_:Dynamic;
+	static var _hxwerks_self_:Entity;
 	static var _hxwerks_:Dynamic;
 }
