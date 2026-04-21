@@ -3,6 +3,7 @@ package leadwerks;
 import leadwerks.types.AabbBounds;
 import leadwerks.types.Vec3;
 import leadwerks.types.Vec2;
+import leadwerks.Display;
 
 /**
 	Global Leadwerks Lua API (`_G`). Extend as you map more engine functions.
@@ -19,7 +20,7 @@ extern class Globals
 	static function CreateNavAgent(navmesh:NavMesh, ?radius:Float, ?height:Float):NavAgent;
 	static function CreateWindow(title:String, x:Int, y:Int, w:Int, h:Int, display:Dynamic, flags:Int):Window;
 	static function CreateFramebuffer(window:Window):Framebuffer;
-	static function GetDisplays():Dynamic;
+	static function GetDisplays():Array<Display>;
 	static function ActiveWindow():Window;
 
 	/** No args: [0,1); two args: integer in [lo, hi] (see Leadwerks docs). **/
