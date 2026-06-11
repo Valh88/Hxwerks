@@ -14,9 +14,13 @@ abstract class EntityScript
 	}
 
 	/** Current entity while a lifecycle method runs (set by generated Lua). **/
-	@:noCompletion
-	public inline function luaEntity():Entity
+	public var entity(get, never):Entity;
+
+	inline function get_entity():Entity
 		return cast leadwerks.Globals._hxwerks_self_;
+
+	@:noCompletion public inline function luaEntity():Entity
+		return entity;
 
 	/** Called when the script is attached / entity starts. **/
 	@:dox(show) function start():Void

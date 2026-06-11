@@ -615,13 +615,12 @@ class ScriptMacro
 		rel = parts.join("/");
 
 		var useImport = Context.definedValue("hxwerks-use-import");
-		var importLine = if (useImport == "false")
+		var importLine = switch useImport
 		{
-			'require "${parts.join(".")}"';
-		} else
-		{
-			var luaPath = rel + ".lua";
-			'import "${luaPath}"';
+			case null | "false": "";
+			case "import": 'import "${rel}.lua"';
+			case "require": 'require "${parts.join(".")}"';
+			case v: '${v}';
 		};
 
 		var glue = new Glue(outDir, importLine);

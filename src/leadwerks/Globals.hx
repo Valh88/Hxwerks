@@ -64,7 +64,13 @@ extern class Globals
 	static function TransformCoord(x:Float, y:Float, from:Window, to:Window):Dynamic;
 
 	// --- Loaders ---
-	static function LoadModel(world:World, path:String, ?flags:Int):Model;
+	@:overload(function(world:World, path:String, ?flags:Int):Model
+	{
+	})
+	@:overload(function(stream:Stream, ?flags:Int):Model
+	{
+	})
+	static function LoadModel(worldOrStream:Dynamic, pathOrFlags:Dynamic, ?flags:Int):Model;
 	@:overload(function(path:String, ?flags:Int):Sound
 	{
 	})
