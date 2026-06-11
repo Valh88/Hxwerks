@@ -4,7 +4,9 @@ Haxe bindings and tooling for **Leadwerks 5** Lua scripts: type-safe externs, en
 
 ## Status
 
-**This is experimental tooling, not a production-ready product.** APIs, build output, and macro behavior may change without notice. Use at your own risk for prototyping and learning.
+**This is experimental tooling, not a production-ready product.** APIs, build output, and macro behavior may change without notice.
+
+> **Bindings coverage:** Many extern classes, methods, properties, and constants are mapped, but some may be missing or incomplete. Always cross-reference with the [official Leadwerks 5 Lua API documentation](https://www.leadwerks.com/learn/?lang=lua). If you encounter a gap, the Haxe externs are straightforward to extend — pull requests are welcome.
 
 ## Requirements
 
