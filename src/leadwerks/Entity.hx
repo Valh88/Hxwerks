@@ -29,16 +29,28 @@ extern class Entity
 	function AddComponent(tableOrPath:Dynamic, ?start:Bool):Dynamic;
 
 	// --- Forces & Physics ---
-	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void {})
-	@:overload(function(force:Vec3, ?global:Bool):Void {})
+	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void
+	{
+	})
+	@:overload(function(force:Vec3, ?global:Bool):Void
+	{
+	})
 	function AddForce(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic):Void;
 
-	@:overload(function(fx:Float, fy:Float, fz:Float, x:Float, y:Float, z:Float, ?global:Bool):Void {})
-	@:overload(function(force:Vec3, position:Vec3, ?global:Bool):Void {})
+	@:overload(function(fx:Float, fy:Float, fz:Float, x:Float, y:Float, z:Float, ?global:Bool):Void
+	{
+	})
+	@:overload(function(force:Vec3, position:Vec3, ?global:Bool):Void
+	{
+	})
 	function AddPointForce(a:Dynamic, b:Dynamic, c:Dynamic, d:Dynamic, ?e:Dynamic, ?f:Dynamic, ?g:Dynamic):Void;
 
-	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void {})
-	@:overload(function(torque:Vec3, ?global:Bool):Void {})
+	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void
+	{
+	})
+	@:overload(function(torque:Vec3, ?global:Bool):Void
+	{
+	})
 	function AddTorque(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic):Void;
 
 	function SetVelocity(vel:Vec3):Void;
@@ -54,7 +66,9 @@ extern class Entity
 	function SetDamping(lineardamping:Float, angulardamping:Float):Void;
 	function SetElasticity(elasticity:Float):Void;
 	function SetFriction(kinematicfriction:Float, staticfriction:Float):Void;
-	@:overload(function(x:Float, y:Float, z:Float):Void {})
+	@:overload(function(x:Float, y:Float, z:Float):Void
+	{
+	})
 	function SetGravity(y:Float):Void;
 	function SetGravityMode(mode:Bool):Void;
 	function SetMassCenter(x:Float, y:Float, z:Float):Void;
@@ -72,26 +86,46 @@ extern class Entity
 	function SetMatrix(matrix:Dynamic, ?global:Bool):Void;
 	function Move(x:Float, y:Float, z:Float):Void;
 	function Translate(x:Float, y:Float, z:Float):Void;
-	@:overload(function(pitch:Float, yaw:Float, roll:Float, ?global:Bool):Void {})
-	@:overload(function(rotation:Vec3, ?global:Bool):Void {})
-	@:overload(function(rotation:Dynamic, ?global:Bool):Void {})
+	@:overload(function(pitch:Float, yaw:Float, roll:Float, ?global:Bool):Void
+	{
+	})
+	@:overload(function(rotation:Vec3, ?global:Bool):Void
+	{
+	})
+	@:overload(function(rotation:Dynamic, ?global:Bool):Void
+	{
+	})
 	function Turn(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic):Void;
 
 	// --- Alignment / Pointing ---
-	@:overload(function(x:Float, y:Float, z:Float, ?axis:Int, ?rate:Float, ?roll:Float):Void {})
-	@:overload(function(v:Vec3, ?axis:Int, ?rate:Float, ?roll:Float):Void {})
+	@:overload(function(x:Float, y:Float, z:Float, ?axis:Int, ?rate:Float, ?roll:Float):Void
+	{
+	})
+	@:overload(function(v:Vec3, ?axis:Int, ?rate:Float, ?roll:Float):Void
+	{
+	})
 	function AlignToVector(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic, ?e:Float):Void;
 
-	@:overload(function(entity:Entity, ?axis:Int, ?rate:Float, ?roll:Float):Void {})
-	@:overload(function(x:Float, y:Float, z:Float, ?axis:Int, ?rate:Float, ?roll:Float):Void {})
-	@:overload(function(position:Vec3, ?axis:Int, ?rate:Float, ?roll:Float):Void {})
+	@:overload(function(entity:Entity, ?axis:Int, ?rate:Float, ?roll:Float):Void
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, ?axis:Int, ?rate:Float, ?roll:Float):Void
+	{
+	})
+	@:overload(function(position:Vec3, ?axis:Int, ?rate:Float, ?roll:Float):Void
+	{
+	})
 	function Point(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic, ?e:Float):Void;
 
 	// --- Parent / attachment ---
 	function SetParent(parent:Dynamic):Void;
 	function GetParent():Entity;
-	@:overload(function(agent:Dynamic):Void {})
-	@:overload(function(model:Dynamic, bone:Dynamic):Void {})
+	@:overload(function(agent:Dynamic):Void
+	{
+	})
+	@:overload(function(model:Dynamic, bone:Dynamic):Void
+	{
+	})
 	function Attach(a:Dynamic, ?b:Dynamic):Void;
 	function Detach():Void;
 
@@ -116,20 +150,32 @@ extern class Entity
 	function HasTag(tag:String):Bool;
 
 	// --- Children / Hierarchy ---
-	@:overload(function(name:String, ?casesensitive:Bool):Entity {})
-	@:overload(function(name:String, ?casesensitive:Bool):Dynamic {})
+	@:overload(function(name:String, ?casesensitive:Bool):Entity
+	{
+	})
+	@:overload(function(name:String, ?casesensitive:Bool):Dynamic
+	{
+	})
 	function FindChild(name:String, ?casesensitive:Bool):Dynamic;
 	function FindChildren(name:String, ?casesensitive:Bool):Dynamic;
 
 	// --- Collision ---
-	@:overload(function(?hits:Int):Dynamic {})
-	@:overload(function(position:Vec3, rotation:Dynamic, ?hits:Int):Dynamic {})
+	@:overload(function(?hits:Int):Dynamic
+	{
+	})
+	@:overload(function(position:Vec3, rotation:Dynamic, ?hits:Int):Dynamic
+	{
+	})
 	function CollisionTest(entity:Entity, ?hits:Int):Dynamic;
 
 	// --- Angular ---
 	function GetAngularVelocity():Vec3;
-	@:overload(function(omega:Vec3, ?global:Bool):Void {})
-	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void {})
+	@:overload(function(omega:Vec3, ?global:Bool):Void
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void
+	{
+	})
 	function SetAngularVelocity(a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic):Void;
 
 	// --- Picking ---

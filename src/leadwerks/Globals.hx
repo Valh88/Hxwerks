@@ -52,7 +52,8 @@ extern class Globals
 	static function CreateSliderJoint(entity0:Entity, entity1:Entity, ?worldPosition:Vec3, ?axis:Vec3):Joint;
 
 	// --- Nav ---
-	static function CreateNavMesh(world:World, height:Float, tilesx:Int, tilesz:Int, ?tileres:Int, ?voxelsize:Float, ?agentradius:Float, ?agentheight:Float, ?stepheight:Float, ?maxslope:Float):NavMesh;
+	static function CreateNavMesh(world:World, height:Float, tilesx:Int, tilesz:Int, ?tileres:Int, ?voxelsize:Float, ?agentradius:Float, ?agentheight:Float,
+		?stepheight:Float, ?maxslope:Float):NavMesh;
 	static function CreateNavAgent(navmesh:NavMesh, ?radius:Float, ?height:Float):NavAgent;
 
 	// --- Window / Framebuffer / Display ---
@@ -64,8 +65,12 @@ extern class Globals
 
 	// --- Loaders ---
 	static function LoadModel(world:World, path:String, ?flags:Int):Model;
-	@:overload(function(path:String, ?flags:Int):Sound {})
-	@:overload(function(stream:Stream, ?flags:Int):Sound {})
+	@:overload(function(path:String, ?flags:Int):Sound
+	{
+	})
+	@:overload(function(stream:Stream, ?flags:Int):Sound
+	{
+	})
 	static function LoadSound(pathOrStream:Dynamic, ?flags:Int):Sound;
 	static function LoadTexture(path:String, ?flags:Int):Texture;
 	static function LoadFont(path:String, ?flags:Int):Font;

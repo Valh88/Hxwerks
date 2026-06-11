@@ -33,14 +33,18 @@ extern class World
 	function Pick(p0:Vec3, p1:Vec3, radius:Float = 0.0, closest:Bool = false, ?filter:Dynamic, ?extra:Dynamic):PickInfo;
 
 	// --- Lighting ---
-	@:overload(function(r:Float, g:Float, b:Float):Void {})
+	@:overload(function(r:Float, g:Float, b:Float):Void
+	{
+	})
 	function SetAmbientLight(light:Vec3):Void;
 	function GetAmbientLight():Vec3;
 	function SetEnvironmentMap(texture:Dynamic, id:Int):Void;
 	function SetIblIntensity(intensity:Float):Void;
 
 	// --- Gravity ---
-	@:overload(function(x:Float, y:Float, z:Float):Void {})
+	@:overload(function(x:Float, y:Float, z:Float):Void
+	{
+	})
 	function SetGravity(gravity:Vec3):Void;
 
 	// --- Collision ---
