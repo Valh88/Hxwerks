@@ -87,8 +87,10 @@ extern class Globals
 
 	/** Axis-aligned box; use `bounds.min` / `bounds.max` with `GetEntitiesInArea`. **/
 	static function Aabb(min:Vec3, max:Vec3):AabbBounds;
+	
 	/** Square root function. **/
 	static function Sqrt(x:Float):Float;
+	
 	/** Disables picking on an entity (common with projectiles / AI probes). **/
 	static var PICK_NONE:Int;
 
