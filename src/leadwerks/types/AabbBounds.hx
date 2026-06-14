@@ -1,18 +1,13 @@
 package leadwerks.types;
 
-import leadwerks.types.Vec3;
-
-/**
-	Axis-aligned bounding box (aabb) defined by min/max corners.
-**/
-class AabbBounds
+@:native("_G")
+extern class AabbBounds
 {
-	public final min:Vec3;
-	public final max:Vec3;
+	var min:Vec3;
+	var max:Vec3;
+	var center:Vec3;
+	var size:Vec3;
+	var radius:Float;
 
-	public function new(min:Vec3, max:Vec3)
-	{
-		this.min = min;
-		this.max = max;
-	}
+	function Update():Void;
 }

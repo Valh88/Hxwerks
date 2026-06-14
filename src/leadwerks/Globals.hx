@@ -4,6 +4,7 @@ import leadwerks.Display;
 import leadwerks.types.AabbBounds;
 import leadwerks.types.IVec2;
 import leadwerks.types.Mat4;
+import leadwerks.types.PickInfo;
 import leadwerks.types.Plane;
 import leadwerks.types.Quat;
 import leadwerks.types.Vec2;
@@ -25,6 +26,7 @@ extern class Globals
 	static function CreateCone(world:World, ?radius:Float, ?height:Float, ?sides:Int):Entity;
 	static function CreateCubeSphere(world:World, ?radius:Float):Entity;
 	static function CreateModel(world:World):Model;
+	static function CreateMesh(world:World):Mesh;
 
 	// --- Light factories ---
 	static function CreateBoxLight(world:World):Light;
@@ -151,6 +153,18 @@ extern class Globals
 
 	// --- Scripting ---
 	static function RunScript(path:String):Void;
+	static function ExecuteString(source:String):Bool;
+	static function CallFunction(name:Dynamic, args:Dynamic, ?results:Dynamic):Dynamic;
+	static function CallMethod(obj:Dynamic, name:String, ?args:Dynamic, ?returnvalues:Dynamic):Dynamic;
+	static function SetGlobal(name:String, value:Dynamic):Void;
+	static function GetGlobal(name:String):Dynamic;
+
+	// --- Color ---
+	static function Rgba(r:Int, g:Int, b:Int, ?a:Int):Int;
+	static function Red(rgba:Int):Int;
+	static function Green(rgba:Int):Int;
+	static function Blue(rgba:Int):Int;
+	static function Alpha(rgba:Int):Int;
 
 	// --- Multithreading (Ultra Engine only; NOT available in Leadwerks 5 Lua) ---
 	static function CreateMutex():Mutex;
@@ -211,6 +225,7 @@ extern class Globals
 	{
 	})
 	static function Plane(x:Float, y:Float, z:Float, d:Float):Plane;
+	static function PickInfo():PickInfo;
 
 	// --- Window flags ---
 	static var WINDOW_CENTER:Int;

@@ -1,23 +1,16 @@
 package leadwerks.types;
 
-import leadwerks.Globals;
-
-/**
-	Thin wrapper for Leadwerks `Vec3` userdata; used for typed `@property` defaults in entity scripts.
-**/
-@:forward
-abstract Vec3(Dynamic) from Dynamic to Dynamic
+@:native("_G")
+extern class Vec3
 {
-	public inline function new(x:Float, y:Float, z:Float)
-		this = Globals.Vec3(x, y, z);
+	var x:Float;
+	var y:Float;
+	var z:Float;
 
-	public static inline function splat(n:Float):Vec3
-		return new Vec3(n, n, n);
-
-	public static inline function zero():Vec3
-		return new Vec3(0, 0, 0);
-
-	@:from
-	static function fromFloat(n:Float):Vec3
-		return splat(n);
+	function Length():Float;
+	function Normalize():Vec3;
+	function Distance(v:Vec3):Float;
+	function Cross(v:Vec3):Vec3;
+	function Dot(v:Vec3):Float;
+	function Inverse():Vec3;
 }

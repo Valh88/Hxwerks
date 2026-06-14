@@ -75,7 +75,7 @@ class Run
 		"		var camera:Camera = Globals.CreateCamera(world);",
 		"		camera.SetFov(70);",
 		"		camera.SetClearColor(0.125);",
-		"		camera.SetRotation(new Vec3(35, 0, 0));",
+		"		camera.SetRotation(Globals.Vec3(35, 0, 0));",
 		"		camera.Move(0, 0, -10);",
 		"		while (!window.Closed() && !window.KeyDown(Globals.KEY_ESCAPE)) {",
 		"			world.Update();",

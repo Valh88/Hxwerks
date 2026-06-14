@@ -1,6 +1,7 @@
 package leadwerks;
 
 import leadwerks.types.PickInfo;
+import leadwerks.types.Vec2;
 import leadwerks.types.Vec3;
 
 @:native("_G")
@@ -10,7 +11,7 @@ extern class Camera extends Entity
 	function SetFov(fov:Float):Void;
 	function GetFov():Float;
 	function SetRange(near:Float, far:Float):Void;
-	function GetRange():Dynamic;
+	function GetRange():Vec2;
 	function SetZoom(zoom:Float):Void;
 	function GetZoom():Float;
 
@@ -30,14 +31,14 @@ extern class Camera extends Entity
 	function SetFogColor(color:Vec3):Void;
 	function GetFogColor():Vec3;
 	function SetFogRange(near:Float, far:Float):Void;
-	function GetFogRange():Dynamic;
+	function GetFogRange():Vec2;
 
 	// --- Picking ---
 	function Pick(framebuffer:Framebuffer, x:Float, y:Float, ?z:Float, ?recursive:Bool):PickInfo;
 
 	// --- Coordinate transforms ---
 	function ScreenToWorld(screenx:Float, screeny:Float, screenz:Float):Vec3;
-	function WorldToScreen(worldpos:Vec3):Dynamic;
+	function WorldToScreen(worldpos:Vec3):Vec2;
 
 	// --- Render ---
 	function Render():Void;
@@ -59,4 +60,5 @@ extern class Camera extends Entity
 	function SetTessellation(density:Float):Void;
 	function SetDepthPrepass(mode:Bool):Void;
 	function SetBackfaceCulling(mode:Bool):Void;
+	function SetUpscaling(mode:Int):Void;
 }
