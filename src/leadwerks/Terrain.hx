@@ -4,7 +4,6 @@ import leadwerks.types.IVec2;
 import leadwerks.types.Vec2;
 import leadwerks.types.Vec3;
 import leadwerks.types.Vec4;
-
 import leadwerks.Model;
 
 @:native("_G")

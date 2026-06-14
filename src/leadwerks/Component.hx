@@ -1,4 +1,5 @@
 package leadwerks;
+
 import leadwerks.types.Vec3;
 
 @:native("_G")
