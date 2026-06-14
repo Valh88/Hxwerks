@@ -152,10 +152,16 @@ extern class Globals
 	// --- Scripting ---
 	static function RunScript(path:String):Void;
 
-	// --- Multithreading ---
+	// --- Multithreading (Ultra Engine only; NOT available in Leadwerks 5 Lua) ---
 	static function CreateMutex():Mutex;
 	static function CreateSemaphore():Semaphore;
-	static function CreateThread(?func:Void->Void):Thread;
+	@:overload(function(func:Void->Void, ?start:Bool):Thread
+	{
+	})
+	@:overload(function(func:Dynamic->Void, extra:Dynamic, ?start:Bool):Thread
+	{
+	})
+	static function CreateThread(func:Void->Void, ?extra:Dynamic, ?start:Bool):Thread;
 	static function MaxThreads():Int;
 
 	// --- Math ---
@@ -366,6 +372,11 @@ extern class Globals
 	static var SPEAKER_STOPPED:Int;
 	static var SPEAKER_PLAYING:Int;
 	static var SPEAKER_PAUSED:Int;
+
+	// --- Thread state (Ultra Engine only) ---
+	static var THREAD_READY:Int;
+	static var THREAD_RUNNING:Int;
+	static var THREAD_FINISHED:Int;
 
 	// --- Network send ---
 	static var SENDTYPE_UNRELIABLE:Int;
