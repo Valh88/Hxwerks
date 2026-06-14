@@ -1,13 +1,14 @@
 package leadwerks;
 
-import leadwerks.types.AabbBounds;
-import leadwerks.types.Vec3;
-import leadwerks.types.Vec2;
-import leadwerks.types.Vec4;
-import leadwerks.types.Mat4;
-import leadwerks.types.Quat;
-import leadwerks.types.IVec2;
 import leadwerks.Display;
+import leadwerks.types.AabbBounds;
+import leadwerks.types.IVec2;
+import leadwerks.types.Mat4;
+import leadwerks.types.Plane;
+import leadwerks.types.Quat;
+import leadwerks.types.Vec2;
+import leadwerks.types.Vec3;
+import leadwerks.types.Vec4;
 
 @:native("_G")
 extern class Globals
@@ -33,6 +34,15 @@ extern class Globals
 
 	// --- Camera ---
 	static function CreateCamera(world:World, ?projection:Int):Camera;
+
+	// --- Terrain ---
+	@:overload(function(world:World, resolution:IVec2):Terrain
+	{
+	})
+	static function CreateTerrain(world:World, width:Int, height:Int):Terrain;
+
+	// --- Particle emitter ---
+	static function CreateParticleEmitter(world:World, ?particles:Int):ParticleEmitter;
 
 	// --- Collider factories ---
 	static function CreateBoxCollider(?x:Float, ?y:Float, ?z:Float):Collider;
@@ -81,14 +91,44 @@ extern class Globals
 	static function LoadTexture(path:String, ?flags:Int):Texture;
 	static function LoadFont(path:String, ?flags:Int):Font;
 	static function LoadMaterial(path:String, ?flags:Int):Material;
-	static function LoadScene(world:World, path:String):Dynamic;
+	@:overload(function(world:World, path:String, ?flags:Int, ?extra:Dynamic):Scene
+	{
+	})
+	@:overload(function(world:World, stream:Stream, ?flags:Int, ?extra:Dynamic):Scene
+	{
+	})
+	static function LoadScene(world:World, pathOrStream:Dynamic, ?flags:Int, ?extra:Dynamic):Scene;
 	static function LoadMap(world:World, path:String):Dynamic;
+
+	// --- Brush factories ---
+	static function CreateBrush(world:World):Brush;
+	static function CreateBoxBrush(world:World, width:Float, height:Float, depth:Float):Brush;
+
+	// --- Buffer factories ---
+	static function CreateBuffer(size:Int):Buffer;
+	static function CreateStaticBuffer(data:Dynamic, size:Int):Buffer;
+	static function LoadBuffer(path:String, ?flags:Int):Buffer;
+	static function CreateBufferStream(?data:Buffer, ?path:String):BufferStream;
+
+	// --- Asset browser ---
+	static function CreateAssetBrowser(?parent:Widget):AssetBrowser;
 
 	// --- Materials / Speaker / Sprite / Texture ---
 	static function CreateMaterial():Material;
 	static function CreateSpeaker(?sound:Sound):Speaker;
 	static function CreateSprite(world:World, a:Dynamic, b:Dynamic, ?c:Dynamic, ?d:Dynamic):Entity;
 	static function CreateTexture(?type:Int, ?width:Int, ?height:Int, ?depth:Int, ?format:Int):Texture;
+	static function CreatePixmap(width:Int, height:Int, ?format:Int, ?pixeldata:Buffer):Pixmap;
+	@:overload(function(path:String, ?flags:Int):Pixmap
+	{
+	})
+	@:overload(function(stream:Stream, ?flags:Int):Pixmap
+	{
+	})
+	static function LoadPixmap(pathOrStream:Dynamic, ?flags:Int):Pixmap;
+	static function LoadAudioFilter(path:String, ?flags:Int):AudioFilter;
+	static function CreatePackage(path:String):Package;
+	static function LoadPackage(path:String, ?flags:Int):Package;
 
 	// --- GUI ---
 	static function CreateInterface(windowOrCamera:Dynamic, ?font:Font, ?size:IVec2):Interface;
@@ -158,6 +198,13 @@ extern class Globals
 	static function Aabb(min:Vec3, max:Vec3):AabbBounds;
 	static function Mat4(?a:Dynamic, ?b:Dynamic, ?c:Dynamic, ?d:Dynamic):Mat4;
 	static function Quat(x:Float, y:Float, z:Float, w:Float):Quat;
+	@:overload(function(point:Vec3, normal:Vec3):Plane
+	{
+	})
+	@:overload(function(a:Vec3, b:Vec3, c:Vec3):Plane
+	{
+	})
+	static function Plane(x:Float, y:Float, z:Float, d:Float):Plane;
 
 	// --- Window flags ---
 	static var WINDOW_CENTER:Int;

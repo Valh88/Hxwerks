@@ -22,6 +22,7 @@ extern class Entity
 	var quaternion:Dynamic;
 	var rotation:Vec3;
 	var scale:Vec3;
+	var speakers:Array<Speaker>;
 	var tags:Array<String>;
 	var velocity:Vec3;
 
@@ -82,6 +83,13 @@ extern class Entity
 	function GetRotation(?global:Bool):Vec3;
 	function GetQuaternion(?global:Bool):Dynamic;
 	function GetScale():Vec3;
+	@:overload(function(scale:Vec3):Void
+	{
+	})
+	@:overload(function(scale:Float):Void
+	{
+	})
+	function SetScale(x:Float, y:Float, z:Float):Void;
 	function GetMatrix(?global:Bool):Dynamic;
 	function SetMatrix(matrix:Dynamic, ?global:Bool):Void;
 	function Move(x:Float, y:Float, z:Float):Void;
@@ -212,7 +220,7 @@ extern class Entity
 
 	// --- Lifecycle callbacks (overridable in Lua, declared for type safety) ---
 	function Start():Void;
-	function Load(properties:Dynamic, binstream:Dynamic, scene:Dynamic, flags:Int, extra:Dynamic):Bool;
+	function Load(properties:Dynamic, binstream:Stream, scene:Scene, flags:Int, extra:Dynamic):Bool;
 	function Update():Void;
 	function Collide(collidedentity:Entity, position:Vec3, normal:Vec3, speed:Float):Void;
 
