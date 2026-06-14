@@ -7,7 +7,7 @@ import leadwerks.types.Vec3;
 extern class Texture extends Asset
 {
 	var size:Vec3;
-	var mipchain:Dynamic;
+	var mipchain:Array<Texture>;
 
 	function BuildMipmaps():Void;
 	function SetPixels(data:String, ?width:Int, ?height:Int, ?format:Int):Void;

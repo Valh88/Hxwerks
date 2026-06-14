@@ -28,6 +28,8 @@ extern class Entity
 
 	// --- Components ---
 	function AddComponent(tableOrPath:Dynamic, ?start:Bool):Dynamic;
+	function GetComponent(nameOrTable:Dynamic):Dynamic;
+	function GetComponentData(tableOrPath:Dynamic):Dynamic;
 
 	// --- Forces & Physics ---
 	@:overload(function(x:Float, y:Float, z:Float, ?global:Bool):Void

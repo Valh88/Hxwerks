@@ -1,18 +1,22 @@
 package leadwerks;
 
 import haxe.Rest;
+import leadwerks.types.AnimationStats;
+import leadwerks.types.IVec2;
+import leadwerks.types.PhysicsStats;
 import leadwerks.types.PickInfo;
+import leadwerks.types.RenderStats;
 import leadwerks.types.Vec3;
 
 @:native("_G")
 extern class World
 {
 	// --- Properties ---
-	var animationstats:Dynamic;
+	var animationstats:AnimationStats;
 	var collisions:Dynamic;
 	var frequency:Float;
-	var physicsstats:Dynamic;
-	var renderstats:Dynamic;
+	var physicsstats:PhysicsStats;
+	var renderstats:RenderStats;
 
 	// --- Update / Render ---
 	function Update(?frequency:Float, ?threads:Int, ?iterations:Int, ?substeps:Int):Void;
@@ -25,9 +29,23 @@ extern class World
 	function Resume():Void;
 
 	// --- Entity Queries ---
-	function GetEntities(rest:Rest<Dynamic>):Dynamic;
-	function GetEntitiesInArea(min:Vec3, max:Vec3, rest:Rest<Dynamic>):Dynamic;
-	function GetTaggedEntities(tag:String):Dynamic;
+	@:overload(function():Array<Entity>
+	{
+	})
+	@:overload(function(field:String, operation:String, value:Dynamic, rest:Rest<Dynamic>):Array<Entity>
+	{
+	})
+	function GetEntities(args:Rest<Dynamic>):Array<Entity>;
+
+	@:overload(function(min:Vec3, max:Vec3):Array<Entity>
+	{
+	})
+	@:overload(function(min:Vec3, max:Vec3, field:String, operation:String, value:Dynamic, rest:Rest<Dynamic>):Array<Entity>
+	{
+	})
+	function GetEntitiesInArea(min:Vec3, max:Vec3, args:Rest<Dynamic>):Array<Entity>;
+
+	function GetTaggedEntities(tag:String):Array<Entity>;
 
 	// --- Pick / Raycast ---
 	function Pick(p0:Vec3, p1:Vec3, radius:Float = 0.0, closest:Bool = false, ?filter:Dynamic, ?extra:Dynamic):PickInfo;
@@ -52,6 +70,9 @@ extern class World
 	function SetCollisionResponse(type1:Int, type2:Int, response:Int):Void;
 	function GetCollisionResponse(type1:Int, type2:Int):Int;
 	function ClearCollisionResponses():Void;
+
+	// --- Save ---
+	function Save(path:String, ?flags:Int):Bool;
 
 	// --- Quality / Stats ---
 	function SetShadowQuality(quality:Float):Void;

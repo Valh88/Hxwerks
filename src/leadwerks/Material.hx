@@ -9,6 +9,7 @@ extern class Material extends Asset
 	var textures:Array<Dynamic>;
 
 	function GetColor():Vec4;
+	function SetBlend(mode:Int):Void;
 	function SetColor(r:Float, g:Float, b:Float, ?a:Float):Void;
 	function GetMetalness():Float;
 	function SetMetalness(metalness:Float):Void;

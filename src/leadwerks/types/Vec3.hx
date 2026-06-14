@@ -1,16 +1,41 @@
 package leadwerks.types;
 
-@:native("_G")
-extern class Vec3
+@:forward
+extern abstract Vec3(Vec3Data) from Vec3Data to Vec3Data
 {
-	var x:Float;
-	var y:Float;
-	var z:Float;
+	@:op(a + b)
+	private static inline function _add(a:Vec3, b:Vec3):Vec3
+	{
+		return cast (untyped __lua__("({0}) + ({1})", a, b));
+	}
 
-	function Length():Float;
-	function Normalize():Vec3;
-	function Distance(v:Vec3):Float;
-	function Cross(v:Vec3):Vec3;
-	function Dot(v:Vec3):Float;
-	function Inverse():Vec3;
+	@:op(a - b)
+	private static inline function _sub(a:Vec3, b:Vec3):Vec3
+	{
+		return cast (untyped __lua__("({0}) - ({1})", a, b));
+	}
+
+	@:op(-b)
+	private static inline function _neg(a:Vec3):Vec3
+	{
+		return cast (untyped __lua__("-({0})", a));
+	}
+
+	@:op(a * b) @:commutative
+	private static inline function _mulScalar(a:Vec3, b:Float):Vec3
+	{
+		return cast (untyped __lua__("({0}) * ({1})", a, b));
+	}
+
+	@:op(a / b)
+	private static inline function _divScalar(a:Vec3, b:Float):Vec3
+	{
+		return cast (untyped __lua__("({0}) / ({1})", a, b));
+	}
+
+	@:op(a * b)
+	private static inline function _mul(a:Vec3, b:Vec3):Vec3
+	{
+		return cast (untyped __lua__("({0}) * ({1})", a, b));
+	}
 }

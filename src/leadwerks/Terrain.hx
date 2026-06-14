@@ -5,6 +5,8 @@ import leadwerks.types.Vec2;
 import leadwerks.types.Vec3;
 import leadwerks.types.Vec4;
 
+import leadwerks.Model;
+
 @:native("_G")
 extern class Terrain extends Entity
 {
@@ -38,4 +40,5 @@ extern class Terrain extends Entity
 
 	function SetLayerWeight(layer:Int, x:Int, y:Int, weight:Float):Void;
 	function SetTileHidden(tilex:Int, tilez:Int, hidden:Bool):Void;
+	function AddMeshLayer(model:Model, ?spacing:Float):MeshLayer;
 }

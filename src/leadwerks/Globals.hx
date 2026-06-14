@@ -3,6 +3,8 @@ package leadwerks;
 import leadwerks.Display;
 import leadwerks.types.AabbBounds;
 import leadwerks.types.IVec2;
+import leadwerks.types.IVec3;
+import leadwerks.types.IVec4;
 import leadwerks.types.Mat4;
 import leadwerks.types.PickInfo;
 import leadwerks.types.Plane;
@@ -132,6 +134,62 @@ extern class Globals
 	static function CreatePackage(path:String):Package;
 	static function LoadPackage(path:String, ?flags:Int):Package;
 
+	// --- Client / Server / Networking ---
+	static function CreateClient(host:String, port:Int = 8888):Client;
+	static function CreateServer(port:Int):Server;
+
+	// --- Timer ---
+	static function CreateTimer(frequency:Int):Timer;
+
+	// --- Decal / Probe ---
+	static function CreateDecal(world:World):Decal;
+	static function CreateProbe(world:World):Probe;
+
+	// --- TextureBuffer ---
+	static function CreateTextureBuffer(width:Int, height:Int, colorattachments:Int = 1, depthattachment:Bool = false, samples:Int = 0):TextureBuffer;
+
+	// --- Sprite / Tile ---
+	@:overload(function(world:World, path:String, ?flags:Int):Sprite
+	{
+	})
+	@:overload(function(world:World, stream:Stream, ?flags:Int):Sprite
+	{
+	})
+	static function LoadSprite(world:World, pathOrStream:Dynamic, ?flags:Int):Sprite;
+
+	@:overload(function(camera:Camera, width:Float, height:Float, wireframe:Bool = false):Tile
+	{
+	})
+	@:overload(function(camera:Camera, size:Vec2, wireframe:Bool = false):Tile
+	{
+	})
+	@:overload(function(camera:Camera, font:Font, text:String, fontsize:Int = 14, alignment:Int = 0, linespacing:Float = 1.5):Tile
+	{
+	})
+	@:overload(function(world:World, width:Float, height:Float, wireframe:Bool = false):Tile
+	{
+	})
+	@:overload(function(world:World, size:Vec2, wireframe:Bool = false):Tile
+	{
+	})
+	@:overload(function(world:World, font:Font, text:String, fontsize:Int = 14, alignment:Int = 0, linespacing:Float = 1.5):Tile
+	{
+	})
+	static function CreateTile(cameraOrWorld:Dynamic, arg1:Dynamic, arg2:Dynamic, ?arg3:Dynamic, ?arg4:Dynamic, ?arg5:Dynamic, ?arg6:Dynamic):Tile;
+
+	@:overload(function(camera:Camera, path:String, ?flags:Int):Tile
+	{
+	})
+	@:overload(function(world:World, path:String, ?flags:Int):Tile
+	{
+	})
+	static function LoadTile(cameraOrWorld:Dynamic, path:String, ?flags:Int):Tile;
+
+	// --- Plugin / PostEffect / Prefab ---
+	static function LoadPlugin(path:String):Dynamic;
+	static function LoadPostEffect(path:String, ?flags:Int):Dynamic;
+	static function LoadPrefab(world:World, path:String, ?flags:Int, ?extra:Dynamic):Entity;
+
 	// --- GUI ---
 	static function CreateInterface(windowOrCamera:Dynamic, ?font:Font, ?size:IVec2):Interface;
 	static function CreateButton(text:String, x:Int, y:Int, w:Int, h:Int, parent:Widget):Widget;
@@ -212,6 +270,9 @@ extern class Globals
 	static function Sleep(milliseconds:Int):Void;
 
 	// --- Constructors (global Lua functions) ---
+	@:native("iVec2") static function IVec2(x:Int, y:Int):IVec2;
+	@:native("iVec3") static function IVec3(x:Int, y:Int, z:Int):IVec3;
+	@:native("iVec4") static function IVec4(x:Int, y:Int, z:Int, w:Int):IVec4;
 	static function Vec3(x:Float, y:Float, z:Float):Vec3;
 	static function Vec2(x:Float, y:Float):Vec2;
 	static function Vec4(x:Float, y:Float, z:Float, w:Float):Vec4;
@@ -303,6 +364,28 @@ extern class Globals
 	static var EVENT_STARTRENDERER:Int;
 	static var EVENT_WINDOWCLOSE:Int;
 	static var EVENT_WINDOWSIZE:Int;
+	static var EVENT_WINDOWPAINT:Int;
+	static var EVENT_WINDOWACCEPT:Int;
+	static var EVENT_WINDOWMOVE:Int;
+	static var EVENT_WINDOWSELECT:Int;
+	static var EVENT_WINDOWDESELECT:Int;
+	static var EVENT_WINDOWDRAGBEGIN:Int;
+	static var EVENT_WINDOWDRAGEND:Int;
+	static var EVENT_WINDOWDPICHANGE:Int;
+	static var EVENT_KEYCHAR:Int;
+	static var EVENT_KEYREPEAT:Int;
+	static var EVENT_DOUBLECLICK:Int;
+	static var EVENT_TRIPLECLICK:Int;
+	static var EVENT_TIMERTICK:Int;
+	static var EVENT_WIDGETSELECT:Int;
+	static var EVENT_WIDGETDESELECT:Int;
+	static var EVENT_WIDGETOPEN:Int;
+	static var EVENT_WIDGETCLOSE:Int;
+	static var EVENT_WIDGETMENU:Int;
+	static var EVENT_WIDGETGAINFOCUS:Int;
+	static var EVENT_WIDGETLOSEFOCUS:Int;
+	static var EVENT_WIDGETDROP:Int;
+	static var EVENT_ZOOM:Int;
 
 	// --- Physics modes ---
 	static var PHYSICS_NONE:Int;
@@ -327,6 +410,14 @@ extern class Globals
 
 	// --- Picking ---
 	static var PICK_NONE:Int;
+	static var PICK_MESH:Int;
+	static var PICK_AABB:Int;
+	static var PICK_CIRCLE:Int;
+	static var PICK_SPHERE:Int;
+	static var PICK_CAPSULE:Int;
+	static var PICK_CYLINDER:Int;
+	static var PICK_CONE:Int;
+	static var PICK_PLANE:Int;
 
 	// --- Bounds modes ---
 	static var BOUNDS_LOCAL:Int;
@@ -352,6 +443,35 @@ extern class Globals
 	// --- Clear mode ---
 	static var CLEAR_COLOR:Int;
 	static var CLEAR_DEPTH:Int;
+
+	// --- Blend modes ---
+	static var BLEND_SOLID:Int;
+	static var BLEND_ALPHA:Int;
+	static var BLEND_MASK:Int;
+
+	// --- Save flags ---
+	static var SAVE_DEFAULT:Int;
+	static var SAVE_SCENE:Int;
+	static var SAVE_ENTITY:Int;
+
+	// --- Network messages ---
+	static var MESSAGE_CONNECT:Int;
+	static var MESSAGE_DISCONNECT:Int;
+	static var MESSAGE_DATA:Int;
+
+	// --- Sprite view modes ---
+	static var VIEWMODE_ORBIT:Int;
+	static var VIEWMODE_PIVOT:Int;
+	static var VIEWMODE_SCREEN:Int;
+	static var VIEWMODE_CAMERA:Int;
+
+	// --- Cubemap sides ---
+	static var CUBEMAP_POSITIVEX:Int;
+	static var CUBEMAP_NEGATIVEX:Int;
+	static var CUBEMAP_POSITIVEY:Int;
+	static var CUBEMAP_NEGATIVEY:Int;
+	static var CUBEMAP_POSITIVEZ:Int;
+	static var CUBEMAP_NEGATIVEZ:Int;
 
 	// --- Texture slots ---
 	static var TEXTURE_BASE:Int;
