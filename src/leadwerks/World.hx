@@ -35,7 +35,7 @@ extern class World
 	@:overload(function(field:String, operation:String, value:Dynamic, rest:Rest<Dynamic>):Array<Entity>
 	{
 	})
-	function GetEntities(args:Rest<Dynamic>):Array<Entity>;
+	function GetEntities(args:Rest<Dynamic>):Dynamic;
 
 	@:overload(function(min:Vec3, max:Vec3):Array<Entity>
 	{
@@ -43,9 +43,9 @@ extern class World
 	@:overload(function(min:Vec3, max:Vec3, field:String, operation:String, value:Dynamic, rest:Rest<Dynamic>):Array<Entity>
 	{
 	})
-	function GetEntitiesInArea(min:Vec3, max:Vec3, args:Rest<Dynamic>):Array<Entity>;
+	function GetEntitiesInArea(min:Vec3, max:Vec3, args:Rest<Dynamic>):Dynamic;
 
-	function GetTaggedEntities(tag:String):Array<Entity>;
+	function GetTaggedEntities(tag:String):Dynamic;
 
 	// --- Pick / Raycast ---
 	function Pick(p0:Vec3, p1:Vec3, radius:Float = 0.0, closest:Bool = false, ?filter:Dynamic, ?extra:Dynamic):PickInfo;

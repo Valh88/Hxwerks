@@ -38,6 +38,7 @@ extern class Globals
 
 	// --- Camera ---
 	static function CreateCamera(world:World, ?projection:Int):Camera;
+	static function Camera(entity:Entity):Camera;
 
 	// --- Terrain ---
 	@:overload(function(world:World, resolution:IVec2):Terrain
@@ -358,6 +359,7 @@ extern class Globals
 	static var EVENT_MOUSEWHEEL:Int;
 	static var EVENT_MOUSEENTER:Int;
 	static var EVENT_MOUSELEAVE:Int;
+	static var EVENT_WORLDPAUSE:Int;
 	static var EVENT_WORLDRESUME:Int;
 	static var EVENT_WIDGETACTION:Int;
 	static var EVENT_QUIT:Int;
@@ -436,6 +438,7 @@ extern class Globals
 
 	// --- Cursors ---
 	static var CURSOR_DEFAULT:Int;
+	static var CURSOR_NONE:Int;
 	static var CURSOR_TEXTINPUT:Int;
 	static var CURSOR_HAND:Int;
 	static var CURSOR_CROSS:Int;

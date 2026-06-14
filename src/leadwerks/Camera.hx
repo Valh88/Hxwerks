@@ -55,6 +55,7 @@ extern class Camera extends Entity
 	function SetRealtime(realtime:Bool):Void;
 	function SetRefraction(enabled:Bool):Void;
 	function SetRenderTarget(texture:Dynamic):Void;
+	function GetRenderTarget():Dynamic;
 	function SetSweptCulling(mode:Bool):Void;
 	function SetSsr(mode:Bool):Void;
 	function SetTessellation(density:Float):Void;
