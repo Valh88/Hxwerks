@@ -40,10 +40,10 @@ extern class World
 	@:overload(function(min:Vec3, max:Vec3):Array<Entity>
 	{
 	})
-	@:overload(function(min:Vec3, max:Vec3, field:String, operation:String, value:Dynamic, rest:Rest<Dynamic>):Array<Entity>
+	@:overload(function(min:Vec3, max:Vec3, field:String, operation:String, value:Dynamic):Array<Entity>
 	{
 	})
-	function GetEntitiesInArea(min:Vec3, max:Vec3, args:Rest<Dynamic>):Dynamic;
+	function GetEntitiesInArea(min:Vec3, max:Vec3, ?field:String, ?operation:String, ?value:Dynamic):Dynamic;
 
 	function GetTaggedEntities(tag:String):Dynamic;
 

@@ -50,11 +50,15 @@ extern class Globals
 	static function CreateParticleEmitter(world:World, ?particles:Int):ParticleEmitter;
 
 	// --- Collider factories ---
+	static function CreateCollisionBox(?x:Float, ?y:Float, ?z:Float):Collider;
 	static function CreateBoxCollider(?x:Float, ?y:Float, ?z:Float):Collider;
 	static function CreateSphereCollider(?radius:Float):Collider;
 	static function CreateCapsuleCollider(?radius:Float, ?height:Float):Collider;
 	static function CreateCylinderCollider(?radius:Float, ?height:Float):Collider;
 	static function CreateConeCollider(?radius:Float, ?height:Float):Collider;
+	@:overload(function(points:Array<Vec3>):Collider
+	{
+	})
 	static function CreateConvexHullCollider(model:Model):Collider;
 	static function CreateCompoundCollider():Collider;
 	static function CreateMeshCollider(model:Model):Collider;
@@ -111,7 +115,7 @@ extern class Globals
 
 	// --- Buffer factories ---
 	static function CreateBuffer(size:Int):Buffer;
-	static function CreateStaticBuffer(data:Dynamic, size:Int):Buffer;
+	static function CreateStaticBuffer(data:Dynamic /* userdata pointer */, size:Int):Buffer;
 	static function LoadBuffer(path:String, ?flags:Int):Buffer;
 	static function CreateBufferStream(?data:Buffer, ?path:String):BufferStream;
 
@@ -132,6 +136,9 @@ extern class Globals
 	})
 	static function LoadPixmap(pathOrStream:Dynamic, ?flags:Int):Pixmap;
 	static function LoadAudioFilter(path:String, ?flags:Int):AudioFilter;
+	static function LoadIcon(path:String, ?flags:Int):Dynamic;
+	static function LoadShaderFamily(path:String, ?flags:Int):Dynamic;
+	static function LoadCollider(path:String, ?flags:Int):Collider;
 	static function CreatePackage(path:String):Package;
 	static function LoadPackage(path:String, ?flags:Int):Package;
 
@@ -239,36 +246,133 @@ extern class Globals
 
 	// --- Math ---
 	static function Random(?lo:Float, ?hi:Float):Float;
+	static function SeedRandom(seed:Int):Void;
 	static function Round(x:Float):Float;
 	static function Sqrt(x:Float):Float;
 	static function Abs(x:Float):Float;
 	static function Clamp(value:Float, min:Float, max:Float):Float;
+	static function CurveValue(current:Float, target:Float, smooth:Float):Float;
 	static function Mix(a:Float, b:Float, t:Float):Float;
 	static function MoveTowards(current:Float, target:Float, maxDelta:Float):Float;
+	static function Angle(value:Float):Float;
+	static function DeltaAngle(a:Float, b:Float):Float;
+	static function Step(value:Float):Float;
+	static function StepAngle(a:Float, b:Float, d:Float):Float;
+	static function Dec(value:Float):Float;
+	static function Hex(value:Int):String;
 	static function Cos(degrees:Float):Float;
 	static function Sin(degrees:Float):Float;
 	static function Tan(radians:Float):Float;
 	static function ACos(value:Float):Float;
 	static function ASin(value:Float):Float;
-	static function ATan2(y:Float, x:Float):Float;
+	@:overload(function(value:Float):Float
+	{
+	})
+	static function ATan(y:Float, ?x:Float):Float;
+	static function Degrees(radians:Float):Float;
+	static function Radians(degrees:Float):Float;
+	static function MixAngle(angle0:Float, angle1:Float, d:Float):Float;
 	static function Millisecs():Int;
 	static function Min(a:Float, b:Float):Float;
 	static function Max(a:Float, b:Float):Float;
+	@:overload(function(point:Vec3, src:Mat4, dst:Mat4):Vec3
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, src:Mat4, dst:Mat4):Vec3
+	{
+	})
+	@:overload(function(point:Vec3, src:Entity, dst:Entity):Vec3
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, src:Entity, dst:Entity):Vec3
+	{
+	})
+	static function TransformPoint(point:Dynamic, src:Dynamic, dst:Dynamic):Vec3;
+	@:overload(function(n:Vec3, src:Mat4, dst:Mat4):Vec3
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, src:Mat4, dst:Mat4):Vec3
+	{
+	})
+	@:overload(function(n:Vec3, src:Entity, dst:Entity):Vec3
+	{
+	})
+	@:overload(function(x:Float, y:Float, z:Float, src:Entity, dst:Entity):Vec3
+	{
+	})
+	static function TransformNormal(n:Dynamic, src:Dynamic, dst:Dynamic):Vec3;
+	static function TransformAabb(aabb:AabbBounds, src:Mat4, dst:Mat4, ?exact:Bool):AabbBounds;
+	static function TransformPlane(p:Plane, src:Mat4, dst:Mat4):Plane;
+	static function TransformRotation(rotation:Vec3, src:Mat4, dst:Mat4):Vec3;
+	static function TransformVector(v:Vec3, src:Mat4, dst:Mat4):Vec3;
 	static function Floor(x:Float):Float;
 	static function Ceil(x:Float):Float;
 	static function Mod(a:Float, b:Float):Float;
 	static function Sign(x:Float):Float;
 
 	// --- I/O ---
+	static function FileType(path:String, ?packages:Bool):Int;
+	static function FileSize(path:String):Int;
+	static function FileTime(path:String):Int;
+	static function FileHidden(path:String):Bool;
+	static function ShowFile(path:String):Bool;
+	static function HideFile(path:String):Bool;
+	static function AppDir():String;
+	static function AppPath():String;
+	static function Command():String;
+	static function CurrentDir():String;
+	static function ChangeDir(path:String):Bool;
+	static function CreateDir(path:String):Bool;
+	static function DeleteDir(path:String):Bool;
+	static function DeleteFile(path:String):Bool;
+	static function RenameFile(oldPath:String, newPath:String):Bool;
+	static function CasedPath(path:String):String;
+	static function RealPath(path:String):String;
+	static function ExtractDir(path:String):String;
+	static function ExtractExt(path:String):String;
+	static function StripDir(path:String):String;
+	static function StripExt(path:String):String;
+	static function StripAll(path:String):String;
+	static function GetPath(path:String):String;
+	static function LoadDir(path:String):Array<String>;
+	static function OpenDir(path:String):Dynamic;
+	static function CreateFile(path:String):Stream;
+	static function GetFileExtensions(type:Int):String;
+	static function GetFilePattern(type:Int):String;
 	static function Print(msg:String):Void;
 	static function Notify(msg:String, ?title:String, ?quit:Bool):Void;
+	static function Confirm(msg:String, ?title:String):Bool;
+	static function Proceed(msg:String, ?title:String):Bool;
+	static function Message(msg:String, ?title:String):Bool;
+	static function RequestFile(title:String, path:String, pattern:String):String;
+	static function RequestDir(title:String, path:String):String;
 
 	// --- Events ---
 	static function EmitEvent(eventId:Int, ?source:Dynamic, ?extra:Dynamic):Void;
 	static function ListenEvent(eventId:Int, source:Dynamic, handler:Dynamic, ?extra:Dynamic):Void;
 	static function WaitEvent():Dynamic;
 	static function PeekEvent():Bool;
+	static function FlushEvents():Void;
 	static function Sleep(milliseconds:Int):Void;
+	static function ClearPostEffects():Void;
+
+	// --- System ---
+	static function Assert(condition:Bool, ?message:String):Void;
+	static function Uuid():String;
+	static function GetMemoryUsage():Int;
+	static function GetLuaState():Dynamic;
+	static function PollDebugger():Void;
+	static function RuntimeError(message:String):Void;
+	static function WString(str:String):String;
+	static function FetchUrl(url:String):String;
+	static function DownloadFile(url:String, path:String):Bool;
+	static function ASyncDownloadFile(url:String, path:String):Void;
+	static function SaveTable(path:String, table:Dynamic):Bool;
+	static function LoadTable(path:String):Dynamic;
+	static function RunFile(path:String):Bool;
+	static function GetHmd():Dynamic;
+	static function GetGamePads():Dynamic;
+	static function SetHrtf(enabled:Bool):Bool;
 
 	// --- Constructors (global Lua functions) ---
 	@:native("iVec2") static function IVec2(x:Int, y:Int):IVec2;
@@ -279,6 +383,9 @@ extern class Globals
 	static function Vec4(x:Float, y:Float, z:Float, w:Float):Vec4;
 	static function Aabb(min:Vec3, max:Vec3):AabbBounds;
 	static function Mat4(?a:Dynamic, ?b:Dynamic, ?c:Dynamic, ?d:Dynamic):Mat4;
+	@:overload(function(euler:Vec3):Quat
+	{
+	})
 	static function Quat(x:Float, y:Float, z:Float, w:Float):Quat;
 	@:overload(function(point:Vec3, normal:Vec3):Plane
 	{

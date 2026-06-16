@@ -13,3 +13,4 @@
 -D hxwerks-entitiesdir=Entities/HxGen
 --macro leadwerks.support.ScriptMacro.use()
 -dce full
+#haxelib run formatter -s src   

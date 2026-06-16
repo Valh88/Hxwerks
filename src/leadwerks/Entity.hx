@@ -11,14 +11,17 @@ import leadwerks.types.PickInfo;
 extern class Entity
 {
 	// --- Properties (Lua fields) ---
+	var camera:Camera;
 	var extra:Dynamic;
 	var kids:Array<Entity>;
 	var matrix:Dynamic;
 	var name:String;
+	var navmesh:NavMesh;
 	var omega:Vec3;
 	var parent:Entity;
 	var position:Vec3;
 	var properties:Dynamic;
+	var scene:Scene;
 	var quaternion:Dynamic;
 	var rotation:Vec3;
 	var scale:Vec3;
@@ -79,7 +82,7 @@ extern class Entity
 	function SetSweptCollision(mode:Bool):Void;
 
 	// --- Position / Rotation / Scale ---
-	function SetPosition(pos:Vec3):Void;
+	function SetPosition(pos:Vec3, ?global:Bool):Void;
 	function GetPosition(?global:Bool):Vec3;
 	function SetRotation(rot:Vec3, ?global:Bool):Void;
 	function GetRotation(?global:Bool):Vec3;
@@ -144,6 +147,7 @@ extern class Entity
 	function GetColor():Vec4;
 	function SetHidden(hidden:Bool):Void;
 	function GetHidden():Bool;
+	function GetEnabled():Bool;
 	function SetShadows(enabled:Bool):Void;
 	function SetRenderLayers(layers:Int):Void;
 	function SetMaterial(material:Dynamic):Void;
